@@ -40,3 +40,27 @@ maintainability, and separation of concerns.
 2. User logs in with password + MFA verification
 3. Dashboard displays analytics and visualisations
 4. Users can view and manage patient records securely
+## Technology Stack
+
+### Backend
+- **Python 3**
+- **Flask** – Web framework
+- **Flask-Login** – Authentication and session management
+- **PyOTP** – Multi-Factor Authentication (MFA)
+- **SQLite** – Lightweight relational database
+
+### Frontend
+- **HTML5**
+- **CSS3**
+- **Jinja2 Templates**
+- **Chart.js** – Data visualisation (charts and graphs)
+
+### Data & Tools
+- **CSV Dataset** – Stroke and healthcare patient data
+- **Git & GitHub** – Version control
+- **VS Code** – Development environment
+
+### Security Features
+- Password hashing
+- Mandatory MFA using authenticator apps
+- Role-based access to dashboard and patient records
