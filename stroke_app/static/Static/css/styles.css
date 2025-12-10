@@ -1,0 +1,100 @@
+/* -------------------------------- */
+/*  LOGIN PAGE MODERN COLOR THEME    */
+/* -------------------------------- */
+
+.login-box {
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #dbeafe 100%);
+    border: 1px solid #e5e7eb;
+    backdrop-filter: blur(6px);
+}
+
+.login-logo {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.35);
+}
+
+.login-input {
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+}
+
+.login-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 999px;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border: none;
+    box-shadow: 0 10px 25px rgba(29, 78, 216, 0.30);
+    transition: 0.2s ease-in-out;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #01080d, #3176bb);
+    box-shadow: 0 12px 28px rgba(29, 78, 216, 0.45);
+}
+body {
+    background: linear-gradient(
+        135deg,
+        #e0e7ff 0%,
+        #f0f9ff 50%,
+        #e0f2fe 100%
+    ) !important;
+    background-attachment: fixed;
+
+    /* Optional subtle pattern */
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25) 0, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2) 0, transparent 50%);
+}
+body {
+    background: radial-gradient(circle at 20% 20%, #dbeafe 0%, #eef2ff 30%, #f8fafc 80%) fixed;
+    background-color: #eef2ff;
+}
+
+/* Optional floating soft shapes */
+.login-background-shapes::before,
+.login-background-shapes::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.40;
+}
+
+.login-background-shapes::before {
+    width: 450px;
+    height: 450px;
+    background: #93c5fd;
+    top: -120px;
+    left: -120px;
+}
+
+.login-background-shapes::after {
+    width: 550px;
+    height: 550px;
+    background: #c7d2fe;
+    bottom: -150px;
+    right: -150px;
+}body {
+    background: linear-gradient(135deg, #dbeafe 0%, #eef2ff 40%, #f0f9ff 100%) !important;
+}
+
+body {
+    background: red !important;
+}
