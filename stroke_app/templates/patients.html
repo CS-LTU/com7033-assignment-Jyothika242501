@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="fw-bold mb-4">Patients List</h2>
+
+    <!-- SEARCH BAR -->
+    <form method="get" class="row mb-3">
+        <div class="col-md-10">
+            <input type="text" name="search" class="form-control" placeholder="Search by Patient ID">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+
+    <!-- PATIENTS TABLE -->
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Hypertension</th>
+                <th>Heart Disease</th>
+                <th>Married</th>
+                <th>Work Type</th>
+                <th>Residence</th>
+                <th>Glucose</th>
+                <th>BMI</th>
+                <th>Smoking</th>
+                <th>Stroke</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in patients %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.gender }}</td>
+                <td>{{ p.age }}</td>
+                <td>{{ p.hypertension }}</td>
+                <td>{{ p.heart_disease }}</td>
+                <td>{{ p.ever_married }}</td>
+                <td>{{ p.work_type }}</td>
+                <td>{{ p.residence_type }}</td>
+                <td>{{ p.avg_glucose_level }}</td>
+                <td>{{ p.bmi }}</td>
+                <td>{{ p.smoking_status }}</td>
+                <td>{{ p.stroke }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

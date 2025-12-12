@@ -1,22 +1,33 @@
 # stroke_app/main_routes.py
-
-from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user
+from flask import Blueprint, render_template
+from flask_login import login_required
+from .models import Patient
 
 main_bp = Blueprint("main", __name__)
 
 
 @main_bp.route("/")
 def home():
-    """
-    Public landing page.
-
-    If the user is NOT logged in -> show the NHS-style home page.
-    If the user IS logged in       -> redirect straight to the dashboard.
-    """
-    if current_user.is_authenticated:
-        # Logged-in users should not see the marketing/landing page
-        return redirect(url_for("patient.dashboard"))
-
-    # Anonymous visitors see the public home page
     return render_template("home.html")
+
+
+@main_bp.route("/dashboard")
+@login_required
+def dashboard():
+    total = Patient.query.count()
+    strokes = Patient.query.filter_by(stroke=1).count()
+    hypertension = Patient.query.filter_by(hypertension=1).count()
+    heart_disease = Patient.query.filter_by(heart_disease=1).count()
+
+    male = Patient.query.filter_by(gender="Male").count()
+    female = Patient.query.filter_by(gender="Female").count()
+
+    return render_template(
+        "dashboard.html",
+        total=total,
+        strokes=strokes,
+        hypertension=hypertension,
+        heart_disease=heart_disease,
+        male=male,
+        female=female
+    )

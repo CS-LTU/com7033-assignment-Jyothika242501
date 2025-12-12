@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Patient Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="fw-bold mb-3">Patient Details</h2>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <p><strong>ID:</strong> {{ patient.id }}</p>
+            <p><strong>Gender:</strong> {{ patient.gender }}</p>
+            <p><strong>Age:</strong> {{ patient.age }}</p>
+            <p><strong>Hypertension:</strong> {{ patient.hypertension }}</p>
+            <p><strong>Heart Disease:</strong> {{ patient.heart_disease }}</p>
+            <p><strong>Stroke:</strong> {{ patient.stroke }}</p>
+            <p><strong>BMI:</strong> {{ patient.bmi }}</p>
+            <p><strong>Avg Glucose:</strong> {{ patient.avg_glucose_level }}</p>
+            <p><strong>Smoking:</strong> {{ patient.smoking_status }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
