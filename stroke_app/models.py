@@ -1,78 +1,46 @@
-# stroke_app/models.py
-
-"""
-models.py
----------
-Contains database models for:
-1. SQLite Patient table (SQLAlchemy)
-2. MongoDB User model wrapper (Flask-Login compatible)
-
-This separation allows:
-- SQL database for structured medical records
-- MongoDB for flexible authentication storage
-"""
-
 from flask_login import UserMixin
-from . import db, mongo
+from . import db, login_manager
 
 
-# -----------------------------------------------------------
-# SQLALCHEMY PATIENT MODEL  (SQLite)
-# -----------------------------------------------------------
-# stroke_app/models.py
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-from . import db
 
-class Patient(db.Model):
-    __tablename__ = "patients"
+class User(db.Model, UserMixin):
+    __tablename__ = "users"
 
-    # Primary Key
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
 
-    # Basic fields exactly matching CSV
-    gender = db.Column(db.String(10))
-    age = db.Column(db.Float)
-    hypertension = db.Column(db.Integer)
-    heart_disease = db.Column(db.Integer)
-
-    ever_married = db.Column(db.String(10))
-    work_type = db.Column(db.String(50))
-
-    # FIXED FIELD — must match the CSV name logically
-    residence_type = db.Column(db.String(20))
-
-    avg_glucose_level = db.Column(db.Float)
-    bmi = db.Column(db.Float)
-    smoking_status = db.Column(db.String(20))
-
-    stroke = db.Column(db.Integer)
+    # MFA
+    mfa_secret = db.Column(db.String(32), nullable=True)
+    mfa_enabled = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f"<Patient {self.id}>"
+        return f"<User {self.email}>"
 
 
+class Patient(db.Model):
+    # IMPORTANT: this must match the existing table name
+    __tablename__ = "patient"
 
-# -----------------------------------------------------------
-# MONGODB USER MODEL (Flask-Login Compatible)
-# -----------------------------------------------------------
-class User(UserMixin):
-    """
-    User class wraps a MongoDB document so Flask-Login
-    can manage authentication sessions.
-    """
+    id = db.Column(db.Integer, primary_key=True)
+    # original dataset has "id", we map it to patient_id and keep unique
+    patient_id = db.Column(db.Integer, unique=True, nullable=True)
 
-    def __init__(self, user_id, email=None):
-        self.id = user_id
-        self.email = email
+    gender = db.Column(db.String(20), nullable=True)
+    age = db.Column(db.Float, nullable=True)
+    hypertension = db.Column(db.Integer, default=0)
+    heart_disease = db.Column(db.Integer, default=0)
+    ever_married = db.Column(db.String(10), nullable=True)
+    work_type = db.Column(db.String(50), nullable=True)
+    residence_type = db.Column(db.String(20), nullable=True)
+    avg_glucose_level = db.Column(db.Float, nullable=True)
+    bmi = db.Column(db.Float, nullable=True)
+    smoking_status = db.Column(db.String(50), nullable=True)
+    stroke = db.Column(db.Integer, default=0)
 
-    @staticmethod
-    def get_user_by_email(email):
-        """Fetch a MongoDB user by email."""
-        users = mongo.db.users
-        return users.find_one({"email": email})
-
-    @staticmethod
-    def create_user(email, hashed_password):
-        """Creates new MongoDB user."""
-        users = mongo.db.users
-        users.insert_one({"email": email, "password": hashed_password})
+    def __repr__(self):
+        return f"<Patient {self.patient_id}>"
